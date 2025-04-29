@@ -5,10 +5,14 @@ package beaker
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"os"
+	"path/filepath"
 
+	"github.com/carabiner-dev/beaker/pkg/runners/golang"
 	"google.golang.org/protobuf/encoding/protojson"
+	"sigs.k8s.io/release-utils/util"
 )
 
 func New(funcs ...OptFn) (*Launcher, error) {
@@ -69,4 +73,21 @@ func (l *Launcher) Test(ctx context.Context, pack *LaunchPack) error {
 	}
 
 	return nil
+}
+
+// LaunchPackFromRepo reads a codebase and returns a launchpack
+func LaunchPackFromRepo(path string) (*LaunchPack, error) {
+	switch {
+	case util.Exists(filepath.Join(path, "go.mod")):
+		gorunner, err := golang.New(golang.WithWorkDir(path))
+		if err != nil {
+			return nil, fmt.Errorf("initializing go launchpack: %w", err)
+		}
+		return &LaunchPack{
+			Runner: gorunner,
+			Parser: gorunner,
+		}, nil
+	default:
+		return nil, errors.New("unable to detect the language ecosystem")
+	}
 }

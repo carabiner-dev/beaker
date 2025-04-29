@@ -9,17 +9,21 @@ import (
 	"fmt"
 
 	"github.com/carabiner-dev/beaker/pkg/beaker"
-	"github.com/carabiner-dev/beaker/pkg/runners/golang"
 	"github.com/spf13/cobra"
+	"sigs.k8s.io/release-utils/util"
 )
 
 type runOptions struct {
 	configFile string
+	workDir    string
 }
 
 // Validates the options in context with arguments
 func (ro *runOptions) Validate() error {
 	errs := []error{}
+	if !util.IsDir(ro.workDir) {
+		errs = append(errs, errors.New("working directory does not exist"))
+	}
 	// if to.SpecPath == "" {
 	// 	errs = append(errs, errors.New("spec path not defined"))
 	// }
@@ -38,6 +42,9 @@ func (ro *runOptions) AddFlags(cmd *cobra.Command) {
 		&ro.configFile, "runner", "r", "", "test runner to configure",
 	)
 	cmd.PersistentFlags().StringVarP(
+		&ro.workDir, "dir", "d", ".", "path to codebase",
+	)
+	cmd.PersistentFlags().StringVarP(
 		&ro.configFile, "config", "c", ".beaker.yaml", "path to configuration file",
 	)
 }
@@ -51,6 +58,14 @@ func addRun(parentCmd *cobra.Command) {
 		SilenceUsage:      false,
 		SilenceErrors:     true,
 		PersistentPreRunE: initLogging,
+		PreRunE: func(cmd *cobra.Command, args []string) error {
+			if len(args) > 0 {
+				if opts.workDir == "." || opts.workDir == "" {
+					opts.workDir = args[0]
+				}
+			}
+			return nil
+		},
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			// Validate the options
 			if err := opts.Validate(); err != nil {
@@ -63,18 +78,12 @@ func addRun(parentCmd *cobra.Command) {
 				return fmt.Errorf("creating launcher")
 			}
 
-			gorunner, err := golang.New()
+			pack, err := beaker.LaunchPackFromRepo(opts.workDir)
 			if err != nil {
-				return fmt.Errorf("creating runner: %w", err)
+				return fmt.Errorf("automatically building launchpack: %w", err)
 			}
 
-			return launcher.Test(
-				context.Background(),
-				&beaker.LaunchPack{
-					Runner: gorunner,
-					Parser: gorunner,
-				},
-			)
+			return launcher.Test(context.Background(), pack)
 		},
 	}
 	opts.AddFlags(attCmd)
