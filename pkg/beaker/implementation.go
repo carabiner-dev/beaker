@@ -34,6 +34,11 @@ func (dli *defaultLauncherImplementation) InitAttestation(_ context.Context, opt
 		return nil, nil
 	}
 
+	locator, err := git.RepoVCSLocator(opts.WorkDir)
+	if err != nil {
+		return nil, fmt.Errorf("reading VCS locator: %w", err)
+	}
+
 	// Get the repo version
 	tagPlus, commit, err := git.RepoVersion(opts.WorkDir)
 	if err != nil {
@@ -45,7 +50,7 @@ func (dli *defaultLauncherImplementation) InitAttestation(_ context.Context, opt
 		Configuration: []*v1.ResourceDescriptor{
 			{
 				Name: tagPlus,
-				//Uri:  "",
+				Uri:  locator,
 				Digest: map[string]string{
 					"sha1": commit,
 				},
