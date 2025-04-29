@@ -25,14 +25,19 @@ type testLine struct {
 }
 
 // ParseResults parses the structures output of the go tests
-func (r *Runner) ParseResults(ctx context.Context, res []byte) (*testresult.TestResult, error) {
+func (r *Runner) ParseResults(ctx context.Context, att *testresult.TestResult, res []byte) (*testresult.TestResult, error) {
 	dec := json.NewDecoder(bytes.NewReader(res))
-	ret := testresult.TestResult{
-		Result:        "pass", // will change below if tests fail
-		Configuration: []*intoto.ResourceDescriptor{},
-		Url:           "",
-		PassedTests:   []string{},
-		FailedTests:   []string{},
+	if att == nil {
+		att = &testresult.TestResult{
+			Result:        "pass", // will change below if tests fail
+			Configuration: []*intoto.ResourceDescriptor{},
+			PassedTests:   []string{},
+			FailedTests:   []string{},
+		}
+	} else {
+		att.Result = "pass"
+		att.PassedTests = []string{}
+		att.FailedTests = []string{}
 	}
 
 	for {
@@ -53,15 +58,15 @@ func (r *Runner) ParseResults(ctx context.Context, res []byte) (*testresult.Test
 
 		switch result.Action {
 		case "fail":
-			ret.FailedTests = append(ret.FailedTests, result.Test)
+			(*att).FailedTests = append((*att).FailedTests, result.Test)
 		case "pass":
-			ret.PassedTests = append(ret.PassedTests, result.Test)
+			(*att).PassedTests = append((*att).PassedTests, result.Test)
 		}
 	}
 
-	if len(ret.FailedTests) > 0 {
-		ret.Result = "fail"
+	if len((*att).FailedTests) > 0 {
+		(*att).Result = "fail"
 	}
 
-	return &ret, nil
+	return att, nil
 }

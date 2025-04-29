@@ -1,30 +1,20 @@
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: Copyright 2025 Carabiner Systems, Inc
+
 package beaker
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"io"
 	"os"
 
 	"google.golang.org/protobuf/encoding/protojson"
 )
 
-type OptFn func(*Options) error
-
-func WithWriter(w io.Writer) OptFn {
-	return func(o *Options) error {
-		if w == nil {
-			return errors.New("passed writer is nil")
-		}
-		o.Writer = w
-		return nil
-	}
-}
-
 func New(funcs ...OptFn) (*Launcher, error) {
 	opts := Options{
-		Writer: os.Stdout,
+		Writer:  os.Stdout,
+		WorkDir: ".",
 	}
 	for _, f := range funcs {
 		if err := f(&opts); err != nil {
@@ -32,28 +22,29 @@ func New(funcs ...OptFn) (*Launcher, error) {
 		}
 	}
 	return &Launcher{
+		impl:    &defaultLauncherImplementation{},
 		Options: opts,
 	}, nil
 }
 
-type Options struct {
-	Writer io.Writer
-}
-
 type Launcher struct {
+	impl    launcherImplementation
 	Options Options
 }
 
 // Test launches the test suite defined in the launch pack
 func (l *Launcher) Test(ctx context.Context, pack *LaunchPack) error {
+	att, err := l.impl.InitAttestation(ctx, &l.Options)
+	if err != nil {
+		return fmt.Errorf("initializing attestation: %w", err)
+	}
+
 	output, _, err := pack.Runner.Run(ctx)
 	if err != nil {
 		return fmt.Errorf("runner error: %w", err)
 	}
 
-	fmt.Printf("OUTPUT:\n%s\n", string(output))
-
-	att, err := pack.Parser.ParseResults(ctx, output)
+	att, err = pack.Parser.ParseResults(ctx, att, output)
 	if err != nil {
 		return fmt.Errorf("parsing results: %w", err)
 	}
