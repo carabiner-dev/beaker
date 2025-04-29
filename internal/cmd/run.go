@@ -83,10 +83,20 @@ func addRun(parentCmd *cobra.Command) {
 			}
 
 			defer func() {
-				f.Close() //nolint:errcheck,gosec
+				if err := f.Close(); err != nil {
+					return
+				}
+				i, err := f.Stat()
+				if err != nil {
+					return
+				}
+				if i.Size() == 0 {
+					os.Remove(f.Name()) //nolint:errcheck,gosec
+				}
 			}()
 
 			launcher, err := beaker.New(
+				beaker.WithWriter(f),
 				beaker.WithAttest(opts.attest),
 				beaker.WithWorkDir(opts.workDir),
 			)
