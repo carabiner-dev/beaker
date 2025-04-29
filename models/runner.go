@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: Copyright 2025 Carabiner Systems, Inc
 
-package run
+package models
 
 import (
 	"context"
@@ -14,5 +14,5 @@ type TestRunner interface {
 }
 
 type ResultsParser interface {
-	ParseResults(context.Context, []byte) (*testresult.TestResult, error)
+	ParseResults(context.Context, *testresult.TestResult, []byte) (*testresult.TestResult, error)
 }

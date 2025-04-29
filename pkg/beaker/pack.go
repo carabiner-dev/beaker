@@ -7,12 +7,12 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/carabiner-dev/beaker/pkg/run"
+	"github.com/carabiner-dev/beaker/models"
 )
 
 type LaunchPack struct {
-	Runner run.TestRunner
-	Parser run.ResultsParser
+	Runner models.TestRunner
+	Parser models.ResultsParser
 }
 
 func (pack *LaunchPack) Verify() error {
