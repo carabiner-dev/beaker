@@ -8,10 +8,11 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/carabiner-dev/beaker/internal/git"
 	v0 "github.com/in-toto/attestation/go/predicates/test_result/v0"
 	v1 "github.com/in-toto/attestation/go/v1"
 	"sigs.k8s.io/release-utils/util"
+
+	"github.com/carabiner-dev/beaker/internal/git"
 )
 
 type launcherImplementation interface {

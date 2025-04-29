@@ -72,7 +72,7 @@ type Runner struct {
 }
 
 // Run runs the tests
-func (r *Runner) Run(context.Context) ([]byte, bool, error) {
+func (r *Runner) Run(context.Context) (attestation []byte, pass bool, err error) {
 	var cmd *command.Command
 	if r.Options.WorkDir == "" {
 		cmd = command.New(
@@ -88,7 +88,7 @@ func (r *Runner) Run(context.Context) ([]byte, bool, error) {
 	}
 
 	if len(r.Options.Env) > 0 {
-		var envs = []string{}
+		envs := []string{}
 		for k, val := range r.Options.Env {
 			envs = append(envs, fmt.Sprintf("%s=%s", k, val))
 		}

@@ -58,14 +58,14 @@ func (r *Runner) ParseResults(ctx context.Context, att *testresult.TestResult, r
 
 		switch result.Action {
 		case "fail":
-			(*att).FailedTests = append((*att).FailedTests, result.Test)
+			att.FailedTests = append(att.FailedTests, result.Test)
 		case "pass":
-			(*att).PassedTests = append((*att).PassedTests, result.Test)
+			att.PassedTests = append(att.PassedTests, result.Test)
 		}
 	}
 
-	if len((*att).FailedTests) > 0 {
-		(*att).Result = "fail"
+	if len(att.GetFailedTests()) > 0 {
+		att.Result = "fail"
 	}
 
 	return att, nil

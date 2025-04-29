@@ -7,8 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/carabiner-dev/beaker/pkg/runners/shell"
 	"sigs.k8s.io/release-utils/util"
+
+	"github.com/carabiner-dev/beaker/pkg/runners/shell"
 )
 
 type Options struct {
@@ -59,6 +60,6 @@ type Runner struct {
 }
 
 // Run runs the tests
-func (r *Runner) Run(ctx context.Context) ([]byte, bool, error) {
+func (r *Runner) Run(ctx context.Context) (attestation []byte, pass bool, err error) {
 	return r.runner.Run(ctx)
 }

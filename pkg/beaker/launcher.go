@@ -13,9 +13,10 @@ import (
 
 	ajson "github.com/carabiner-dev/ampel/pkg/formats/predicate/json"
 	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
-	"github.com/carabiner-dev/beaker/pkg/runners/golang"
 	"google.golang.org/protobuf/encoding/protojson"
 	"sigs.k8s.io/release-utils/util"
+
+	"github.com/carabiner-dev/beaker/pkg/runners/golang"
 )
 
 func New(funcs ...OptFn) (*Launcher, error) {
