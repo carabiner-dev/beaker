@@ -52,7 +52,8 @@ func (dli *defaultLauncherImplementation) InitAttestation(_ context.Context, opt
 				Name: tagPlus,
 				Uri:  locator,
 				Digest: map[string]string{
-					"sha1": commit,
+					"sha1":      commit,
+					"gitCommit": commit,
 				},
 			},
 		},

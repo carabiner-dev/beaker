@@ -16,6 +16,7 @@ type OptFn func(*Options) error
 type Options struct {
 	Writer  io.Writer
 	WorkDir string
+	Attest  bool
 }
 
 func WithWriter(w io.Writer) OptFn {
@@ -34,6 +35,13 @@ func WithWorkDir(path string) OptFn {
 			return fmt.Errorf("workind dir does not exist: %q", path)
 		}
 		o.WorkDir = path
+		return nil
+	}
+}
+
+func WithAttest(doattest bool) OptFn {
+	return func(o *Options) error {
+		o.Attest = doattest
 		return nil
 	}
 }

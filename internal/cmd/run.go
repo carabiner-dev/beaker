@@ -16,6 +16,7 @@ import (
 type runOptions struct {
 	configFile string
 	workDir    string
+	attest     bool
 }
 
 // Validates the options in context with arguments
@@ -47,6 +48,9 @@ func (ro *runOptions) AddFlags(cmd *cobra.Command) {
 	cmd.PersistentFlags().StringVarP(
 		&ro.configFile, "config", "c", ".beaker.yaml", "path to configuration file",
 	)
+	cmd.PersistentFlags().BoolVarP(
+		&ro.attest, "attest", "a", true, "output the entire in-toto statement (instead of predicate)",
+	)
 }
 
 func addRun(parentCmd *cobra.Command) {
@@ -73,7 +77,10 @@ func addRun(parentCmd *cobra.Command) {
 			}
 			cmd.SilenceUsage = true
 
-			launcher, err := beaker.New()
+			launcher, err := beaker.New(
+				beaker.WithAttest(opts.attest),
+				beaker.WithWorkDir(opts.workDir),
+			)
 			if err != nil {
 				return fmt.Errorf("creating launcher")
 			}

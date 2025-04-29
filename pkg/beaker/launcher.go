@@ -5,11 +5,14 @@ package beaker
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
 
+	ajson "github.com/carabiner-dev/ampel/pkg/formats/predicate/json"
+	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
 	"github.com/carabiner-dev/beaker/pkg/runners/golang"
 	"google.golang.org/protobuf/encoding/protojson"
 	"sigs.k8s.io/release-utils/util"
@@ -19,6 +22,7 @@ func New(funcs ...OptFn) (*Launcher, error) {
 	opts := Options{
 		Writer:  os.Stdout,
 		WorkDir: ".",
+		Attest:  true,
 	}
 	for _, f := range funcs {
 		if err := f(&opts); err != nil {
@@ -58,9 +62,8 @@ func (l *Launcher) Test(ctx context.Context, pack *LaunchPack) error {
 	}
 
 	encoder := protojson.MarshalOptions{
-		Multiline:         true,
-		Indent:            "  ",
-		EmitDefaultValues: true,
+		Multiline: true,
+		Indent:    "  ",
 	}
 
 	jdata, err := encoder.Marshal(att)
@@ -68,8 +71,34 @@ func (l *Launcher) Test(ctx context.Context, pack *LaunchPack) error {
 		return fmt.Errorf("marshalling attestation: %w", err)
 	}
 
-	if _, err := l.Options.Writer.Write(jdata); err != nil {
-		return fmt.Errorf("wiriting attestation data: %w", err)
+	// If attesting output the statement, not a predicate
+	if l.Options.Attest {
+		// Ensure a subject is present
+		if len(att.GetConfiguration()) == 0 {
+			return fmt.Errorf("unable to attest no repository data found in configuration")
+		}
+		pred, err := ajson.New(
+			ajson.WithJson(jdata),
+			ajson.WithType("https://in-toto.io/attestation/test-result/v0.1"),
+		)
+		if err != nil {
+			return fmt.Errorf("creating new predicate: %w", err)
+		}
+
+		s := intoto.NewStatement(
+			intoto.WithPredicate(pred),
+			intoto.WithSubject(att.GetConfiguration()[0]),
+		)
+
+		enc := json.NewEncoder(l.Options.Writer)
+		enc.SetIndent("", "  ")
+		if err := enc.Encode(s); err != nil {
+			return fmt.Errorf("marshaling statement: %w", err)
+		}
+	} else {
+		if _, err := l.Options.Writer.Write(jdata); err != nil {
+			return fmt.Errorf("wiriting attestation data: %w", err)
+		}
 	}
 
 	return nil
