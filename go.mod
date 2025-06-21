@@ -3,7 +3,7 @@ module github.com/carabiner-dev/beaker
 go 1.24.1
 
 require (
-	github.com/carabiner-dev/ampel v0.0.1-pre3
+	github.com/carabiner-dev/ampel v0.0.1-pre9
 	github.com/go-git/go-git/v5 v5.16.2
 	github.com/in-toto/attestation v1.1.2-0.20250128181946-c0b4d86cf712
 	github.com/sirupsen/logrus v1.9.3
@@ -19,6 +19,7 @@ require (
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/ProtonMail/go-crypto v1.1.6 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
+	github.com/carabiner-dev/openeox v0.0.0-20250430212020-e3a5beb42ddd // indirect
 	github.com/carabiner-dev/osv v0.0.0-20250124012120-b8ce4531cd92 // indirect
 	github.com/cloudflare/circl v1.6.1 // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be // indirect
@@ -27,7 +28,7 @@ require (
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.6.2 // indirect
-	github.com/go-jose/go-jose/v4 v4.0.2 // indirect
+	github.com/go-jose/go-jose/v4 v4.0.5 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -42,8 +43,8 @@ require (
 	github.com/protobom/protobom v0.5.2 // indirect
 	github.com/secure-systems-lab/go-securesystemslib v0.9.0 // indirect
 	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
-	github.com/sigstore/sigstore v1.8.12 // indirect
-	github.com/sigstore/sigstore-go v0.7.0 // indirect
+	github.com/sigstore/sigstore v1.9.1 // indirect
+	github.com/sigstore/sigstore-go v0.7.2 // indirect
 	github.com/skeema/knownhosts v1.3.1 // indirect
 	github.com/spdx/tools-golang v0.5.5 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
