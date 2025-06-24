@@ -5,7 +5,7 @@ go 1.24.1
 require (
 	github.com/carabiner-dev/ampel v0.0.1-pre9
 	github.com/go-git/go-git/v5 v5.16.2
-	github.com/in-toto/attestation v1.1.2-0.20250128181946-c0b4d86cf712
+	github.com/in-toto/attestation v1.1.2
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
