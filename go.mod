@@ -1,6 +1,6 @@
 module github.com/carabiner-dev/beaker
 
-go 1.24.1
+go 1.25.1
 
 require (
 	github.com/carabiner-dev/ampel v0.0.1-pre9
