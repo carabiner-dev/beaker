@@ -10,7 +10,7 @@ import (
 
 	v0 "github.com/in-toto/attestation/go/predicates/test_result/v0"
 	v1 "github.com/in-toto/attestation/go/v1"
-	"sigs.k8s.io/release-utils/util"
+	"sigs.k8s.io/release-utils/helpers"
 
 	"github.com/carabiner-dev/beaker/internal/git"
 )
@@ -31,7 +31,7 @@ func (dli *defaultLauncherImplementation) RunLaunchPack(ctx context.Context, opt
 }
 
 func (dli *defaultLauncherImplementation) InitAttestation(_ context.Context, opts *Options) (*v0.TestResult, error) {
-	if !util.Exists(filepath.Join(opts.WorkDir, ".git")) {
+	if !helpers.Exists(filepath.Join(opts.WorkDir, ".git")) {
 		return nil, nil
 	}
 

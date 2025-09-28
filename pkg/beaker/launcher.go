@@ -11,10 +11,10 @@ import (
 	"os"
 	"path/filepath"
 
-	ajson "github.com/carabiner-dev/ampel/pkg/formats/predicate/json"
-	"github.com/carabiner-dev/ampel/pkg/formats/statement/intoto"
+	ajson "github.com/carabiner-dev/collector/predicate/json"
+	"github.com/carabiner-dev/collector/statement/intoto"
 	"google.golang.org/protobuf/encoding/protojson"
-	"sigs.k8s.io/release-utils/util"
+	"sigs.k8s.io/release-utils/helpers"
 
 	"github.com/carabiner-dev/beaker/pkg/runners/golang"
 )
@@ -108,7 +108,7 @@ func (l *Launcher) Test(ctx context.Context, pack *LaunchPack) error {
 // LaunchPackFromRepo reads a codebase and returns a launchpack
 func LaunchPackFromRepo(path string) (*LaunchPack, error) {
 	switch {
-	case util.Exists(filepath.Join(path, "go.mod")):
+	case helpers.Exists(filepath.Join(path, "go.mod")):
 		gorunner, err := golang.New(golang.WithWorkDir(path))
 		if err != nil {
 			return nil, fmt.Errorf("initializing go launchpack: %w", err)

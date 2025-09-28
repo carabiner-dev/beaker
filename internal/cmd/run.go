@@ -10,7 +10,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"sigs.k8s.io/release-utils/util"
+	"sigs.k8s.io/release-utils/helpers"
 
 	"github.com/carabiner-dev/beaker/pkg/beaker"
 )
@@ -25,7 +25,7 @@ type runOptions struct {
 // Validates the options in context with arguments
 func (ro *runOptions) Validate() error {
 	errs := []error{}
-	if !util.IsDir(ro.workDir) {
+	if !helpers.IsDir(ro.workDir) {
 		errs = append(errs, errors.New("working directory does not exist"))
 	}
 
