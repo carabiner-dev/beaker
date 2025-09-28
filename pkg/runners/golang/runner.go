@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 
-	"sigs.k8s.io/release-utils/util"
+	"sigs.k8s.io/release-utils/helpers"
 
 	"github.com/carabiner-dev/beaker/pkg/runners/shell"
 )
@@ -18,7 +18,7 @@ type Options struct {
 
 func WithWorkDir(path string) OptFn {
 	return func(o *Options) error {
-		if !util.IsDir(path) {
+		if !helpers.IsDir(path) {
 			return fmt.Errorf("workind dir does not exist: %q", path)
 		}
 		o.WorkDir = path

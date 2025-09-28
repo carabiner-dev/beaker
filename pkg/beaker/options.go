@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"io"
 
-	"sigs.k8s.io/release-utils/util"
+	"sigs.k8s.io/release-utils/helpers"
 )
 
 type OptFn func(*Options) error
@@ -31,7 +31,7 @@ func WithWriter(w io.Writer) OptFn {
 
 func WithWorkDir(path string) OptFn {
 	return func(o *Options) error {
-		if !util.IsDir(path) {
+		if !helpers.IsDir(path) {
 			return fmt.Errorf("workind dir does not exist: %q", path)
 		}
 		o.WorkDir = path
