@@ -3,11 +3,11 @@ module github.com/carabiner-dev/beaker
 go 1.25.1
 
 require (
-	github.com/carabiner-dev/collector v0.2.3
-	github.com/go-git/go-git/v5 v5.16.3
+	github.com/carabiner-dev/collector v0.2.5
+	github.com/go-git/go-git/v5 v5.16.4
 	github.com/in-toto/attestation v1.1.2
 	github.com/sirupsen/logrus v1.9.3
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
 	google.golang.org/protobuf v1.36.10
 	sigs.k8s.io/release-utils v0.12.2
@@ -22,8 +22,8 @@ require (
 	github.com/carabiner-dev/attestation v0.2.0 // indirect
 	github.com/carabiner-dev/openeox v0.0.0-20250606202227-fd40810cda47 // indirect
 	github.com/carabiner-dev/osv v0.0.0-20250124012120-b8ce4531cd92 // indirect
-	github.com/carabiner-dev/policy v0.2.1 // indirect
-	github.com/carabiner-dev/signer v0.2.1 // indirect
+	github.com/carabiner-dev/policy v0.3.1 // indirect
+	github.com/carabiner-dev/signer v0.3.1 // indirect
 	github.com/carabiner-dev/vcslocator v0.3.2 // indirect
 	github.com/cloudflare/circl v1.6.1 // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be // indirect
@@ -60,7 +60,7 @@ require (
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	golang.org/x/crypto v0.42.0 // indirect
 	golang.org/x/net v0.43.0 // indirect
-	golang.org/x/sys v0.36.0 // indirect
+	golang.org/x/sys v0.37.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
