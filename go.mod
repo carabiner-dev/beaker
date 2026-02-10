@@ -4,7 +4,7 @@ go 1.25.5
 
 require (
 	github.com/carabiner-dev/collector v0.2.7
-	github.com/go-git/go-git/v5 v5.16.4
+	github.com/go-git/go-git/v5 v5.16.5
 	github.com/in-toto/attestation v1.1.2
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
