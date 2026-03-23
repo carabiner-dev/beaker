@@ -3,7 +3,7 @@ module github.com/carabiner-dev/beaker
 go 1.25.8
 
 require (
-	github.com/carabiner-dev/collector v0.3.1
+	github.com/carabiner-dev/collector v0.3.2
 	github.com/go-git/go-git/v5 v5.17.0
 	github.com/in-toto/attestation v1.1.2
 	github.com/sirupsen/logrus v1.9.4
