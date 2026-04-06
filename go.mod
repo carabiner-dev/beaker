@@ -3,14 +3,14 @@ module github.com/carabiner-dev/beaker
 go 1.25.8
 
 require (
-	github.com/carabiner-dev/collector v0.3.1
-	github.com/go-git/go-git/v5 v5.17.0
-	github.com/in-toto/attestation v1.1.2
+	github.com/carabiner-dev/collector v0.3.3
+	github.com/go-git/go-git/v5 v5.17.2
+	github.com/in-toto/attestation v1.2.0
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
 	google.golang.org/protobuf v1.36.11
-	sigs.k8s.io/release-utils v0.12.3
+	sigs.k8s.io/release-utils v0.12.4
 )
 
 require (
@@ -24,7 +24,7 @@ require (
 	github.com/carabiner-dev/osv v0.0.0-20250124012120-b8ce4531cd92 // indirect
 	github.com/carabiner-dev/policy v0.4.2 // indirect
 	github.com/carabiner-dev/predicates v0.1.0 // indirect
-	github.com/carabiner-dev/signer v0.4.1 // indirect
+	github.com/carabiner-dev/signer v0.4.2 // indirect
 	github.com/carabiner-dev/vcslocator v0.4.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clipperhouse/displaywidth v0.11.0 // indirect
@@ -53,7 +53,7 @@ require (
 	github.com/olekukonko/errors v1.2.0 // indirect
 	github.com/olekukonko/ll v0.1.7 // indirect
 	github.com/olekukonko/tablewriter v1.1.4 // indirect
-	github.com/openvex/go-vex v0.2.7 // indirect
+	github.com/openvex/go-vex v0.2.8 // indirect
 	github.com/package-url/packageurl-go v0.1.5 // indirect
 	github.com/pjbgf/sha1cd v0.5.0 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
