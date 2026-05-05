@@ -17,6 +17,7 @@ import (
 	"sigs.k8s.io/release-utils/helpers"
 
 	"github.com/carabiner-dev/beaker/pkg/runners/golang"
+	"github.com/carabiner-dev/beaker/pkg/runners/npm"
 )
 
 func New(funcs ...OptFn) (*Launcher, error) {
@@ -116,6 +117,15 @@ func LaunchPackFromRepo(path string) (*LaunchPack, error) {
 		return &LaunchPack{
 			Runner: gorunner,
 			Parser: gorunner,
+		}, nil
+	case helpers.Exists(filepath.Join(path, "package.json")):
+		npmrunner, err := npm.New(npm.WithWorkDir(path))
+		if err != nil {
+			return nil, fmt.Errorf("initializing npm launchpack: %w", err)
+		}
+		return &LaunchPack{
+			Runner: npmrunner,
+			Parser: npmrunner,
 		}, nil
 	default:
 		return nil, errors.New("unable to detect the language ecosystem")
