@@ -3,7 +3,7 @@ module github.com/carabiner-dev/beaker
 go 1.25.9
 
 require (
-	github.com/carabiner-dev/collector v0.3.4
+	github.com/carabiner-dev/collector v0.3.5
 	github.com/go-git/go-git/v5 v5.18.0
 	github.com/in-toto/attestation v1.2.0
 	github.com/sirupsen/logrus v1.9.4
@@ -14,6 +14,7 @@ require (
 )
 
 require (
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260415201107-50325440f8f2.1 // indirect
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/CycloneDX/cyclonedx-go v0.10.0 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
@@ -22,10 +23,10 @@ require (
 	github.com/carabiner-dev/attestation v0.2.1 // indirect
 	github.com/carabiner-dev/openeox v1.0.0-pre.1 // indirect
 	github.com/carabiner-dev/osv v0.0.0-20250124012120-b8ce4531cd92 // indirect
-	github.com/carabiner-dev/policy v0.4.5 // indirect
-	github.com/carabiner-dev/predicates v0.1.0 // indirect
+	github.com/carabiner-dev/policy v0.5.0 // indirect
+	github.com/carabiner-dev/predicates v0.5.0 // indirect
 	github.com/carabiner-dev/signer v0.4.5 // indirect
-	github.com/carabiner-dev/vcslocator v0.4.3-0.20260415221723-1e7d86696551 // indirect
+	github.com/carabiner-dev/vcslocator v0.4.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clipperhouse/displaywidth v0.11.0 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
@@ -57,7 +58,7 @@ require (
 	github.com/package-url/packageurl-go v0.1.5 // indirect
 	github.com/pjbgf/sha1cd v0.5.0 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	github.com/protobom/protobom v0.5.4 // indirect
+	github.com/protobom/protobom v0.5.5 // indirect
 	github.com/sergi/go-diff v1.4.0 // indirect
 	github.com/skeema/knownhosts v1.3.2 // indirect
 	github.com/spdx/tools-golang v0.5.7 // indirect
