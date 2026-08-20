@@ -88,7 +88,7 @@ func (r *Runner) Run(context.Context) (attestation []byte, pass bool, err error)
 	}
 
 	if len(r.Options.Env) > 0 {
-		envs := []string{}
+		envs := make([]string, 0, len(r.Options.Env))
 		for k, val := range r.Options.Env {
 			envs = append(envs, fmt.Sprintf("%s=%s", k, val))
 		}

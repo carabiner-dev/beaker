@@ -15,6 +15,11 @@ import (
 	intoto "github.com/in-toto/attestation/go/v1"
 )
 
+const (
+	resultPass = "pass"
+	resultFail = "fail"
+)
+
 type testLine struct {
 	Time    time.Time `json:"Time"`
 	Action  string    `json:"Action"`
@@ -29,13 +34,13 @@ func (r *Runner) ParseResults(ctx context.Context, att *testresult.TestResult, r
 	dec := json.NewDecoder(bytes.NewReader(res))
 	if att == nil {
 		att = &testresult.TestResult{
-			Result:        "pass", // will change below if tests fail
+			Result:        resultPass, // will change below if tests fail
 			Configuration: []*intoto.ResourceDescriptor{},
 			PassedTests:   []string{},
 			FailedTests:   []string{},
 		}
 	} else {
-		att.Result = "pass"
+		att.Result = resultPass
 		att.PassedTests = []string{}
 		att.FailedTests = []string{}
 	}
@@ -65,7 +70,7 @@ func (r *Runner) ParseResults(ctx context.Context, att *testresult.TestResult, r
 	}
 
 	if len(att.GetFailedTests()) > 0 {
-		att.Result = "fail"
+		att.Result = resultFail
 	}
 
 	return att, nil
