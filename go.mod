@@ -3,7 +3,7 @@ module github.com/carabiner-dev/beaker
 go 1.25.12
 
 require (
-	github.com/carabiner-dev/collector v0.3.12
+	github.com/carabiner-dev/collector v0.3.14
 	github.com/go-git/go-git/v5 v5.19.2
 	github.com/in-toto/attestation v1.2.0
 	github.com/sirupsen/logrus v1.10.2
@@ -26,9 +26,9 @@ require (
 	github.com/carabiner-dev/osv v0.1.2 // indirect
 	github.com/carabiner-dev/policy v0.5.1 // indirect
 	github.com/carabiner-dev/predicates v0.5.0 // indirect
-	github.com/carabiner-dev/signer v0.6.0 // indirect
+	github.com/carabiner-dev/signer v0.6.2-0.20260901235141-7abffe0fc666 // indirect
 	github.com/carabiner-dev/spdx3 v0.1.0 // indirect
-	github.com/carabiner-dev/vcslocator v0.4.7 // indirect
+	github.com/carabiner-dev/vcslocator v0.5.0 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clipperhouse/displaywidth v0.11.0 // indirect
@@ -69,7 +69,7 @@ require (
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/google/certificate-transparency-go v1.3.3 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/go-containerregistry v0.21.9 // indirect
+	github.com/google/go-containerregistry v0.22.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.30.0 // indirect
 	github.com/in-toto/in-toto-golang v0.11.0 // indirect
@@ -117,7 +117,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.45.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/crypto v0.55.0 // indirect
-	golang.org/x/mod v0.38.0 // indirect
+	golang.org/x/mod v0.39.0 // indirect
 	golang.org/x/net v0.57.0 // indirect
 	golang.org/x/sync v0.22.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
